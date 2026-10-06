@@ -275,3 +275,22 @@ test("delete permissions", async () => {
   const own = await api().delete(`/api/issues/${created.body.id}`).set(auth(D));
   assert.equal(own.status, 200);
 });
+
+test("system status and public stats", async () => {
+  const s = await api().get("/api/system/status");
+  assert.equal(s.status, 200);
+  assert.equal(s.body.database.status, "ok");
+  assert.equal(s.body.storage.status, "degraded"); // local disk in tests
+  assert.equal(s.body.email.status, "disabled");
+  assert.ok(s.body.api.uptimeSeconds >= 0);
+
+  const r = await api().post("/api/system/reconnect");
+  assert.equal(r.body.message, "Database already connected");
+
+  const p = await api().get("/api/public/stats");
+  assert.equal(p.status, 200);
+  assert.ok(p.body.totals.reports >= 3);
+  assert.ok(p.body.totals.citizens >= 4);
+  assert.ok(p.body.recentResolved.length >= 1);
+  assert.ok(!JSON.stringify(p.body).includes("@"), "public stats must not leak contact details");
+});

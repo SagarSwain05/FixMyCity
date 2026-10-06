@@ -12,6 +12,8 @@ import { getDbStatus } from "./utils/db";
 import { storageProvider } from "./utils/storage";
 import { isEmailEnabled } from "./services/email.service";
 import { errorHandler, notFound } from "./middleware/error";
+import rateLimit from "express-rate-limit";
+import { publicStats, reconnectDatabase, systemStatus } from "./controllers/system.controller";
 
 const app = express();
 app.set("trust proxy", 1); // behind Render's proxy: needed for rate limiting by client IP
@@ -56,10 +58,19 @@ app.get("/api/health", (_req, res) => {
   });
 });
 
+// System endpoints answer even when the database is down (used by the status page).
+app.get("/api/system/status", systemStatus);
+app.post(
+  "/api/system/reconnect",
+  rateLimit({ windowMs: 60_000, limit: env.isTest ? 1000 : 3, standardHeaders: "draft-7", legacyHeaders: false }),
+  reconnectDatabase
+);
+
 app.use("/api", (req, res, next) => {
   if (!getDbStatus().connected) return res.status(503).json({ success: false, message: "Database unavailable" });
   next();
 });
+app.get("/api/public/stats", publicStats);
 app.use("/api", routes);
 
 app.use(notFound);

@@ -26,7 +26,8 @@ export async function notify(input: NotifyInput) {
 
   if (input.email) {
     const user = await User.findById(input.userId).select("email fullName emailNotifications");
-    if (user?.email && user.emailNotifications) {
+    // Demo accounts use an unroutable domain; sending to them would hurt sender reputation.
+    if (user?.email && user.emailNotifications && !user.email.endsWith("@demo.fixmycity.in")) {
       const link = input.issueId ? `${env.clientUrl}/issues/${input.issueId}` : env.clientUrl;
       // fire-and-forget so API latency is not tied to the email provider
       void sendEmail(

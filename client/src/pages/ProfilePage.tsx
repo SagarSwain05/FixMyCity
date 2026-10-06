@@ -1,6 +1,6 @@
 import React, { useRef, useState } from "react";
 import { useNavigate, Link } from "react-router-dom";
-import { Camera, LogOut, Moon, Sun, Monitor, Mail, FileText, ChevronRight } from "lucide-react";
+import { Camera, LogOut, Moon, Sun, Monitor, Mail, FileText, ChevronRight, Info } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 import { useTheme } from "../contexts/ThemeContext";
 import { useNotifications } from "../contexts/NotificationContext";
@@ -97,6 +97,12 @@ const ProfilePage: React.FC = () => {
       <Link to="/my-reports" className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700">
         <FileText size={20} className="text-primary-600" />
         <span className="flex-1 font-medium text-gray-900 dark:text-white">My reports</span>
+        <ChevronRight size={18} className="text-gray-400" />
+      </Link>
+
+      <Link to="/about" className="flex items-center gap-3 bg-white dark:bg-gray-800 rounded-xl p-4 shadow-sm border border-gray-100 dark:border-gray-700">
+        <Info size={20} className="text-primary-600" />
+        <span className="flex-1 font-medium text-gray-900 dark:text-white">About FixMyCity &amp; system status</span>
         <ChevronRight size={18} className="text-gray-400" />
       </Link>
 

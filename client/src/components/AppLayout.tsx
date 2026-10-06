@@ -5,6 +5,7 @@ import { useAuth } from "../contexts/AuthContext";
 import { useNotifications } from "../contexts/NotificationContext";
 import { useTheme } from "../contexts/ThemeContext";
 import ChatBot from "./ChatBot";
+import { SystemStatusButton } from "./SystemStatus";
 
 const NAV = [
   { to: "/", label: "Home", icon: Home, end: true },
@@ -70,6 +71,7 @@ const AppLayout: React.FC = () => {
             ))}
           </nav>
           <div className="ml-auto flex items-center gap-1">
+            <SystemStatusButton compact className="mr-1" />
             <button
               onClick={toggleTheme}
               className="p-2 rounded-lg text-gray-600 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-800"

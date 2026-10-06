@@ -37,3 +37,7 @@ export function emitToStaff(event: string, data: unknown) {
 export function broadcast(event: string, data: unknown) {
   io?.emit(event, data);
 }
+
+export function connectedClients() {
+  return io?.engine.clientsCount ?? 0;
+}

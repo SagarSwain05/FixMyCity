@@ -19,6 +19,7 @@ import { Category, IssueStatus, Urgency } from "../constants";
 
 const args = new Set(process.argv.slice(2));
 const DEMO_PASSWORD = "Demo@1234";
+const ISSUE_COUNT = 30;
 
 const WARDS: Array<{ name: string; lat: number; lng: number }> = [
   { name: "Saheed Nagar", lat: 20.29, lng: 85.844 },
@@ -56,8 +57,6 @@ const CITIZENS = [
   { fullName: "Aditya Das", phone: "+919777000002", email: "aditya@demo.fixmycity.in" },
   { fullName: "Priya Mohanty", phone: "+919777000003", email: "priya@demo.fixmycity.in" },
   { fullName: "Rahul Patnaik", phone: "+919777000004", email: "rahul@demo.fixmycity.in" },
-  { fullName: "Ananya Mishra", phone: "+919777000005", email: "ananya@demo.fixmycity.in" },
-  { fullName: "Sumanta Nayak", phone: "+919777000006", email: "sumanta@demo.fixmycity.in" },
 ];
 
 function rand<T>(arr: T[]): T {
@@ -104,6 +103,7 @@ async function main() {
       role: "staff",
       department: d._id,
       isPhoneVerified: true,
+      emailNotifications: false, // demo addresses must never receive real email
       address: { street: "", city: "Bhubaneswar", state: "Odisha", zip: "" },
     });
     staff.push(s);
@@ -113,7 +113,7 @@ async function main() {
   const citizens = [];
   for (const c of CITIZENS) {
     citizens.push(
-      await User.create({ ...c, password: DEMO_PASSWORD, address: { street: "", city: "Bhubaneswar", state: "Odisha", zip: "751001" } })
+      await User.create({ ...c, password: DEMO_PASSWORD, emailNotifications: false, address: { street: "", city: "Bhubaneswar", state: "Odisha", zip: "751001" } })
     );
   }
   const admin = await User.findOne({ role: "admin" });
@@ -127,7 +127,7 @@ async function main() {
   const addPoints = (id: string, n: number) => points.set(id, (points.get(id) || 0) + n);
 
   const HOUR = 3600 * 1000;
-  for (let i = 0; i < 70; i++) {
+  for (let i = 0; i < ISSUE_COUNT; i++) {
     const t = rand(TEMPLATES);
     const ward = rand(WARDS);
     const reporter = rand(citizens);
@@ -198,7 +198,7 @@ async function main() {
 
   for (const [id, p] of points) await User.updateOne({ _id: id }, { points: p });
 
-  console.log(`Seeded ${staff.length} staff, ${citizens.length} citizens and 70 issues.`);
+  console.log(`Seeded ${staff.length} staff, ${citizens.length} citizens and ${ISSUE_COUNT} issues.`);
   console.log(`Demo citizen login: ${CITIZENS[0].phone} / ${DEMO_PASSWORD}`);
   console.log(`Demo staff login:   ${staff[0].email} / ${DEMO_PASSWORD}`);
 }

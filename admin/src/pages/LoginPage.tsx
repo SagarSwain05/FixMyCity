@@ -3,6 +3,7 @@ import { Navigate, useNavigate } from "react-router-dom";
 import { Shield } from "lucide-react";
 import { useAuth } from "../contexts/AuthContext";
 import { btnPrimary, input } from "../components/ui";
+import ServerWake from "../components/ServerWake";
 
 const LoginPage: React.FC = () => {
   const { login, user } = useAuth();
@@ -37,6 +38,7 @@ const LoginPage: React.FC = () => {
           <p className="text-sm text-gray-600 mt-1">For municipal officials and department staff</p>
         </div>
         <form onSubmit={submit} className="bg-white rounded-2xl shadow-xl border border-gray-100 p-6 space-y-4">
+          <ServerWake />
           <div>
             <label htmlFor="id" className="block text-sm font-medium text-gray-700 mb-1">
               Official email or mobile
@@ -57,6 +59,11 @@ const LoginPage: React.FC = () => {
             <Shield size={12} /> Access is restricted by role. Citizen accounts cannot sign in here.
           </p>
         </form>
+        <p className="text-center text-sm text-gray-500 mt-5">
+          <a href={import.meta.env.VITE_CLIENT_URL || "http://localhost:5173"} className="hover:text-gray-800">
+            ← FixMyCity public site & citizen app
+          </a>
+        </p>
       </div>
     </div>
   );

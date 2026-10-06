@@ -19,6 +19,8 @@ const NotificationsPage = lazy(() => import("./pages/NotificationsPage"));
 const RewardsPage = lazy(() => import("./pages/RewardsPage"));
 const ProfilePage = lazy(() => import("./pages/ProfilePage"));
 const NotFoundPage = lazy(() => import("./pages/NotFoundPage"));
+const StatusPage = lazy(() => import("./pages/StatusPage"));
+const LandingPage = lazy(() => import("./pages/LandingPage"));
 
 function PublicOnly({ children }: { children: JSX.Element }) {
   const { isAuthenticated, isLoading } = useAuth();
@@ -36,6 +38,8 @@ export default function App() {
               <Routes>
                 <Route path="/login" element={<PublicOnly><LoginPage /></PublicOnly>} />
                 <Route path="/signup" element={<PublicOnly><SignupPage /></PublicOnly>} />
+                <Route path="/about" element={<LandingPage />} />
+                <Route path="/status" element={<StatusPage />} />
                 <Route element={<ProtectedRoute><AppLayout /></ProtectedRoute>}>
                   <Route index element={<HomePage />} />
                   <Route path="report" element={<ReportIssuePage />} />
