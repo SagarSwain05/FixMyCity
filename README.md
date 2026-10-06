@@ -2,6 +2,18 @@
 
 **Civic issue reporting for Indian cities.** Citizens report potholes, broken streetlights, garbage and more with a photo and GPS pin. Neighbours confirm reports. Officials verify, route and resolve them from a command center. Built for Smart India Internal Hackathon 2025.
 
+## Live demo
+
+| | URL |
+|---|---|
+| 🌐 Landing page & citizen app | https://fixmycity-five.vercel.app |
+| 🏛️ Municipal command center | https://fixmycity-admin.vercel.app |
+| ⚙️ API · [system status](https://fixmycity-five.vercel.app/status) | https://fixmycity-api-32es.onrender.com/api/health |
+
+Demo logins: citizen `9777000001` / `Demo@1234` · Roads staff `pwd.officer@demo.fixmycity.in` / `Demo@1234` · Sanitation staff `swm.officer@demo.fixmycity.in` / `Demo@1234`.
+
+> The API runs on Render's free tier and sleeps after 15 minutes idle. Open **System status** on the landing page (or the login screen of the command center) and press **Wake / restart server**; it is ready in about 30–60 s.
+
 | App | Folder | For | Deploys to |
 |---|---|---|---|
 | Citizen app (mobile-first PWA) | [`client/`](client) | Residents | Vercel |
@@ -9,6 +21,8 @@
 | API + realtime | [`server/`](server) | Both apps | Render |
 
 Data lives in MongoDB Atlas, media in Cloudinary, and status emails go through Brevo.
+
+Visitors to the root URL see a **landing page** explaining the project to citizens and governments, with live platform numbers, a live map and a **System status** panel (API, database, media storage, email, realtime) that can wake a sleeping server or reconnect the database.
 
 ## Features
 
@@ -43,7 +57,7 @@ cp server/.env.example server/.env      # set MONGODB_URI (e.g. mongodb://127.0.
 cp client/.env.example client/.env
 cp admin/.env.example admin/.env
 
-npm run seed      # 6 departments, staff, citizens, 70 issues around Bhubaneswar
+npm run seed      # 6 departments, 6 staff, 4 citizens, 30 issues around Bhubaneswar
 npm run dev       # API :4000 · citizen app :5173 · command center :5174
 npm test          # API integration tests (spins up an in-memory MongoDB)
 ```

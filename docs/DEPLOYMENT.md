@@ -2,6 +2,21 @@
 
 Target setup (all free tiers): **MongoDB Atlas** (database) · **Render** (API) · **Vercel** ×2 (citizen app and command center) · **Cloudinary** (media) · **Brevo** (email).
 
+## Current production deployment
+
+| Piece | Where | Notes |
+|---|---|---|
+| API | Render web service `fixmycity-api` (Singapore, free) → `https://fixmycity-api-32es.onrender.com` | Auto-deploys on push to `main`; health check `/api/health` |
+| Citizen app + landing | Vercel project `fixmycity` (root `client/`) → `https://fixmycity-five.vercel.app` | Auto-deploys on push |
+| Command center | Vercel project `fixmycity-admin` (root `admin/`) → `https://fixmycity-admin.vercel.app` | Auto-deploys on push |
+| Database | MongoDB Atlas cluster shared with Aura-Audit, database `fixmycity` | |
+| Media | Cloudinary cloud `doa1ypehm`, folder `fixmycity/` | Needs an API key with **upload** permission (a read-only key returns 403 on upload) |
+| Email | Brevo, sender `sagar23swain@gmail.com` | Free plan: 300 emails/day. Demo `@demo.fixmycity.in` accounts never get email |
+
+Vercel env: `VITE_API_URL`, plus `VITE_ADMIN_URL` (client) / `VITE_CLIENT_URL` (admin). Render `CORS_ORIGINS` lists both Vercel domains plus their preview-URL patterns.
+
+## Setting it up from scratch
+
 Do the steps in this order, because each step needs the URL from the one before it.
 
 ## 1. MongoDB Atlas
@@ -54,7 +69,9 @@ cd ../admin && vercel link && vercel env add VITE_API_URL production && vercel -
 
 Then go back to Render and set `CORS_ORIGINS` and `CLIENT_URL` to the two Vercel URLs. Render redeploys automatically.
 
-## 6. Smoke test
+## 6. Smoke test & system status
+Open `<client>/status` (or the status pill on the landing page). Every row should be green. If the API row is red, press **Wake / restart server** (free Render instances sleep after 15 min idle). If only the database is red, press **Reconnect database**.
+
 1. Open the admin URL and sign in with `ADMIN_EMAIL` / `ADMIN_PASSWORD`. Change the password under Settings, and check that *System status* shows Cloudinary and Brevo.
 2. On a phone, open the citizen URL, sign up, and report an issue with a photo.
 3. The report appears live in the admin's bell and verification queue. Verify it, and the phone gets a toast (and an email, if configured).

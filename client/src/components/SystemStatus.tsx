@@ -31,6 +31,7 @@ const STATE_ICON = {
   disabled: <MinusCircle size={16} className="text-gray-400" aria-hidden />,
 };
 const STATE_TEXT = { ok: "Operational", degraded: "Degraded", down: "Down", disabled: "Not configured" };
+const label = (c: Check) => (c.detail?.startsWith("Booting") ? "Starting" : STATE_TEXT[c.status]);
 
 const Row: React.FC<{ icon: React.ElementType; name: string; check: Check | null; fallback?: string }> = ({ icon: Icon, name, check, fallback }) => (
   <li className="flex items-center gap-3 py-2.5">
@@ -43,7 +44,7 @@ const Row: React.FC<{ icon: React.ElementType; name: string; check: Check | null
     </div>
     {check ? (
       <span className="flex items-center gap-1.5 text-xs font-medium text-gray-700 dark:text-gray-200">
-        {STATE_ICON[check.status]} {STATE_TEXT[check.status]}
+        {STATE_ICON[check.status]} {label(check)}
       </span>
     ) : (
       <span className="flex items-center gap-1.5 text-xs font-medium text-gray-500">
@@ -85,7 +86,7 @@ export const SystemStatusPanel: React.FC = () => {
         <Row
           icon={Server}
           name="API server"
-          check={reachable && status ? { status: "ok", detail: `Up ${formatUptime(status.api.uptimeSeconds)} · v${status.api.version} · ${status.api.memoryMb} MB` } : overall === "checking" ? unknown : { status: "down", detail: overall === "waking" ? "Booting…" : "Not responding (likely asleep)" }}
+          check={reachable && status ? { status: "ok", detail: `Up ${formatUptime(status.api.uptimeSeconds)} · v${status.api.version} · ${status.api.memoryMb} MB` } : overall === "checking" ? unknown : overall === "waking" ? { status: "degraded", detail: "Booting… (cold start)" } : { status: "down", detail: "Not responding (likely asleep)" }}
           fallback="Checking…"
         />
         <Row icon={Database} name="Database (MongoDB Atlas)" check={reachable ? status?.database ?? null : null} fallback="Needs the API server" />
