@@ -1,0 +1,16 @@
+{
+  "name": "fixmycity",
+  "version": "1.0.0",
+  "private": true,
+  "description": "FixMyCity – civic issue reporting platform (citizen PWA, municipal command center, API)",
+  "scripts": {
+    "install:all": "npm --prefix server ci && npm --prefix client ci && npm --prefix admin ci",
+    "dev": "concurrently -n api,client,admin -c green,blue,magenta \"npm --prefix server run dev\" \"npm --prefix client run dev\" \"npm --prefix admin run dev\"",
+    "seed": "npm --prefix server run seed",
+    "test": "npm --prefix server test",
+    "build": "npm --prefix server run build && npm --prefix client run build && npm --prefix admin run build"
+  },
+  "devDependencies": {
+    "concurrently": "^9.0.0"
+  }
+}

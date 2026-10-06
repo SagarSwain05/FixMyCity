@@ -1,0 +1,20 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+html {
+  -webkit-tap-highlight-color: transparent;
+}
+
+body {
+  @apply bg-gray-50 text-gray-900 antialiased dark:bg-gray-900 dark:text-gray-100;
+}
+
+/* Leaflet popups follow the app theme */
+.dark .leaflet-popup-content-wrapper,
+.dark .leaflet-popup-tip {
+  @apply bg-gray-800 text-gray-100;
+}
+.dark .leaflet-tile-pane {
+  filter: brightness(0.75) contrast(1.1) saturate(0.8);
+}
