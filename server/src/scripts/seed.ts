@@ -53,9 +53,9 @@ const TEMPLATES: Array<{ title: string; description: string; category: Category 
 ];
 
 const CITIZENS = [
-  { fullName: "Saanvi Sahoo", phone: "+919777000001", email: "saanvi@demo.fixmycity.in" },
-  { fullName: "Aditya Das", phone: "+919777000002", email: "aditya@demo.fixmycity.in" },
-  { fullName: "Priya Mohanty", phone: "+919777000003", email: "priya@demo.fixmycity.in" },
+  { fullName: "Priya Mohanty", phone: "+919777000001", email: "priya@demo.fixmycity.in" },
+  { fullName: "Rohan Behera", phone: "+919777000002", email: "rohan@demo.fixmycity.in" },
+  { fullName: "Anjali Panda", phone: "+919777000003", email: "anjali@demo.fixmycity.in" },
   { fullName: "Rahul Patnaik", phone: "+919777000004", email: "rahul@demo.fixmycity.in" },
 ];
 

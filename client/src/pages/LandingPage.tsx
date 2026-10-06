@@ -295,7 +295,7 @@ const LandingPage: React.FC = () => {
           <Container className="pt-12 sm:pt-20 pb-16 sm:pb-24 grid lg:grid-cols-2 gap-14 lg:gap-8 items-center">
             <motion.div initial={{ opacity: 0, y: 20 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.5 }} className="text-center lg:text-left">
               <span className="inline-flex items-center gap-2 text-xs sm:text-sm font-medium px-3 py-1 rounded-full bg-primary-100 text-primary-800 dark:bg-primary-900/40 dark:text-primary-200">
-                <Sparkles size={14} aria-hidden /> Smart India Hackathon 2025 · Bhubaneswar pilot
+                <Sparkles size={14} aria-hidden /> Now live in Bhubaneswar
               </span>
               <h1 className="mt-5 text-4xl sm:text-5xl lg:text-6xl font-extrabold tracking-tight leading-[1.05]">
                 See it. Snap it.
@@ -594,8 +594,7 @@ const LandingPage: React.FC = () => {
             <div className="flex items-center gap-2 font-bold text-lg">
               <img src="/icon.svg" alt="" className="w-7 h-7" /> FixMyCity
             </div>
-            <p className="mt-3 text-gray-600 dark:text-gray-400 max-w-sm">Civic issue reporting and resolution platform, built for Smart India Internal Hackathon 2025.</p>
-            <p className="mt-3 text-gray-500 dark:text-gray-500">Team: Sagar Swain, Saanvi Sahoo · Mentors: Aditya Narayan Das, Sumanta Sahoo</p>
+            <p className="mt-3 text-gray-600 dark:text-gray-400 max-w-sm">Civic issue reporting and resolution platform for citizens and municipal bodies.</p>
           </div>
           <div>
             <p className="font-semibold mb-3">Platform</p>

@@ -1,6 +1,6 @@
 # FixMyCity
 
-**Civic issue reporting for Indian cities.** Citizens report potholes, broken streetlights, garbage and more with a photo and GPS pin. Neighbours confirm reports. Officials verify, route and resolve them from a command center. Built for Smart India Internal Hackathon 2025.
+**Civic issue reporting for Indian cities.** Citizens report potholes, broken streetlights, garbage and more with a photo and GPS pin. Neighbours confirm reports. Officials verify, route and resolve them from a command center.
 
 ## Live demo
 
@@ -69,7 +69,7 @@ npm test          # API integration tests (spins up an in-memory MongoDB)
 | Admin | `admin@fixmycity.in` or `9000000000` | `Admin@1234` (from `ADMIN_*` env) |
 | Staff (Roads) | `pwd.officer@demo.fixmycity.in` | `Demo@1234` |
 | Staff (Sanitation) | `swm.officer@demo.fixmycity.in` | `Demo@1234` |
-| Citizen | `9777000001` (Saanvi Sahoo) | `Demo@1234` |
+| Citizen | `9777000001` (Priya Mohanty) | `Demo@1234` |
 
 Change the admin password after the first login in production.
 
@@ -82,10 +82,6 @@ Change the admin password after the first login in production.
 ## Tech stack
 
 React 18, TypeScript, Vite, Tailwind CSS, React Router, Leaflet/OpenStreetMap, Recharts, Framer Motion · Node.js, Express, Mongoose (MongoDB 2dsphere geo queries), Zod, JWT, Socket.IO, Multer · Cloudinary · Brevo.
-
-## Team
-
-Sagar Swain, Saanvi Sahoo. Guidance: Aditya Narayan Das, Sumanta Sahoo.
 
 ## License
 
